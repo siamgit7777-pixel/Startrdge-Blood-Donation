@@ -161,120 +161,133 @@
   </head>
 
   <body class="bg-blood-50 blood-pattern min-h-screen">
-    <div class="">
+    <div
+      id="loginPage"
+      class="bg-blue-50 min-h-screen flex flex-col items-center justify-center p-6 relative font-sans"
+    >
       <div
-        class="bg-blood-50 blood-pattern min-h-screen flex flex-col items-center justify-center p-6 relative font-['Poppins']"
+        class="w-full max-w-md bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-blue-100/50 p-8 md:p-10 relative z-10"
       >
-        <div
-          class="w-full max-w-md bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-blue-100/50 p-8 md:p-10 relative z-10"
-        >
-          <div class="text-center mb-8">
-            <div
-              class="w-16 h-16 bg-blood-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blood-200 mx-auto mb-4"
-            >
-              <i data-lucide="heart-pulse" class="w-8 h-8 text-white"></i>
-            </div>
-            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
-              Welcome Back
-            </h1>
-            <p class="text-sm text-gray-400 mt-1">
-              Login to your BloodConnect account
-            </p>
-          </div>
-
-          <form class="space-y-5" onsubmit="event.preventDefault()">
-            <div class="field-group">
-              <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
-                >Email Address</label
-              >
-              <div class="relative">
-                <i
-                  data-lucide="mail"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600"
-                ></i>
-                <input
-                  type="email"
-                  placeholder="name@example.com"
-                  class="input-field w-full pl-10 pr-4 py-3.5 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200"
-                />
-              </div>
-            </div>
-
-            <div class="field-group">
-              <div class="flex justify-between items-center mb-1.5 pl-1">
-                <label class="text-xs font-medium text-gray-500"
-                  >Password</label
-                >
-                <a
-                  href="#"
-                  class="text-[11px] text-blood-600 font-semibold hover:underline"
-                  >Forgot?</a
-                >
-              </div>
-              <div class="relative">
-                <i
-                  data-lucide="lock"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600"
-                ></i>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  class="input-field w-full pl-10 pr-4 py-3.5 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-blood-600 hover:bg-blood-700 active:scale-[0.98] text-white font-semibold text-sm py-4 rounded-2xl shadow-lg shadow-blood-200 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <i data-lucide="log-in" class="w-4 h-4"></i>
-              Login
-            </button>
-          </form>
-
-          <div class="flex items-center gap-4 my-8">
-            <div class="flex-1 h-px bg-gray-100"></div>
-            <span
-              class="text-[10px] text-gray-300 uppercase font-bold tracking-widest"
-              >Or continue with</span
-            >
-            <div class="flex-1 h-px bg-gray-100"></div>
-          </div>
-        </div>
-
-        <div class="fixed bottom-8 right-8 z-20">
-          <a
-            href="#"
-            class="flex items-center gap-2 bg-white border-2 border-blood-200 text-blood-600 font-bold text-sm px-6 py-3 rounded-2xl shadow-xl hover:bg-blood-600 hover:text-white hover:border-blood-600 transition-all duration-300 group"
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <div
+            class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 mx-auto mb-4"
           >
-            <span>Register Now</span>
-            <i
-              data-lucide="arrow-right"
-              class="w-4 h-4 group-hover:translate-x-1 transition-transform"
-            ></i>
-          </a>
+            <i data-lucide="heart-pulse" class="w-8 h-8 text-white"></i>
+          </div>
+          <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
+            Welcome Back
+          </h1>
+          <p class="text-sm text-gray-400 mt-1">
+            Login to your BloodConnect account
+          </p>
         </div>
 
-        <p class="mt-8 text-[11px] text-gray-400 font-medium opacity-50">
-          © 2026 BloodConnect • Secure Login
-        </p>
+        <!-- Form -->
+        <form class="space-y-5" onsubmit="event.preventDefault()">
+          <!-- Email -->
+          <div>
+            <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1">
+              Email Address
+            </label>
+            <div class="relative">
+              <i
+                data-lucide="mail"
+                class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600"
+              ></i>
+              <input
+                type="email"
+                placeholder="name@example.com"
+                class="w-full pl-10 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
+              />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <div class="flex justify-between items-center mb-1.5 pl-1">
+              <label class="text-xs font-medium text-gray-500">
+                Password
+              </label>
+              <a
+                href="#"
+                class="text-[11px] text-blue-600 font-semibold hover:underline"
+              >
+                Forgot?
+              </a>
+            </div>
+
+            <div class="relative">
+              <i
+                data-lucide="lock"
+                class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600"
+              ></i>
+              <input
+                type="password"
+                placeholder="••••••••"
+                class="w-full pl-10 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
+              />
+            </div>
+          </div>
+
+          <!-- Button -->
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold text-sm py-4 rounded-2xl shadow-lg shadow-blue-200 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+            Login
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-4 my-8">
+          <div class="flex-1 h-px bg-gray-100"></div>
+          <span
+            class="text-[10px] text-gray-300 uppercase font-bold tracking-widest"
+          >
+            Or continue with
+          </span>
+          <div class="flex-1 h-px bg-gray-100"></div>
+        </div>
       </div>
 
-      <script>
-        lucide.createIcons();
-      </script>
+      <!-- Register -->
+      <div class="fixed bottom-8 right-8 z-20">
+        <a
+          id="registerBtn"
+          href="#"
+          class="flex items-center gap-2 bg-white border-2 border-blue-200 text-blue-600 font-bold text-sm px-6 py-3 rounded-2xl shadow-xl hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 group"
+        >
+          <span>Register Now</span>
+          <i
+            data-lucide="arrow-right"
+            class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+          ></i>
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <p class="mt-8 text-[11px] text-gray-400 font-medium opacity-50">
+        © 2026 BloodConnect • Secure Login
+      </p>
     </div>
-    <div class="">
+
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <div id="registerPage" class="hidden">
       <div
-        class="bg-blood-50 blood-pattern min-h-screen flex flex-col items-center justify-center p-6 relative font-['Poppins']"
+        class="bg-blue-50 min-h-screen flex flex-col items-center justify-center p-6 relative font-sans"
       >
         <div
           class="w-full max-w-2xl bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-blue-100/50 p-8 md:p-10 relative z-10"
         >
+          <!-- Header -->
           <div class="text-center mb-8">
             <div
-              class="w-14 h-14 bg-blood-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blood-200 mx-auto mb-4"
+              class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 mx-auto mb-4"
             >
               <i data-lucide="user-plus" class="w-7 h-7 text-white"></i>
             </div>
@@ -286,74 +299,87 @@
             </p>
           </div>
 
+          <!-- Form -->
           <form
             class="grid grid-cols-1 md:grid-cols-2 gap-5"
             onsubmit="event.preventDefault()"
           >
-            <div class="field-group">
-              <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
-                >Full Name</label
+            <!-- Full Name -->
+            <div>
+              <label
+                class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
               >
+                Full Name
+              </label>
               <div class="relative">
                 <i
                   data-lucide="user"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600"
                 ></i>
                 <input
                   type="text"
                   placeholder="John Doe"
-                  class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200"
+                  class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
                 />
               </div>
             </div>
 
-            <div class="field-group">
-              <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
-                >Email Address</label
+            <!-- Email -->
+            <div>
+              <label
+                class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
               >
+                Email Address
+              </label>
               <div class="relative">
                 <i
                   data-lucide="mail"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600"
                 ></i>
                 <input
                   type="email"
                   placeholder="name@example.com"
-                  class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200"
+                  class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
                 />
               </div>
             </div>
 
-            <div class="field-group">
-              <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
-                >Phone Number</label
+            <!-- Phone -->
+            <div>
+              <label
+                class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
               >
+                Phone Number
+              </label>
               <div class="relative">
                 <i
                   data-lucide="phone"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600"
                 ></i>
                 <input
                   type="tel"
                   placeholder="+880 1XXX-XXXXXX"
-                  class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200"
+                  class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
                 />
               </div>
             </div>
 
-            <div class="field-group">
-              <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
-                >Blood Group</label
+            <!-- Blood Group -->
+            <div>
+              <label
+                class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
               >
+                Blood Group
+              </label>
               <div class="relative">
                 <i
                   data-lucide="droplets"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600 z-10"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600 z-10"
                 ></i>
                 <select
-                  class="input-field w-full pl-10 pr-10 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 appearance-none focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200 cursor-pointer"
+                  class="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm appearance-none focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10 cursor-pointer"
                 >
-                  <option value="" disabled selected>Select Group</option>
+                  <option disabled selected>Select Group</option>
                   <option>A+</option>
                   <option>A-</option>
                   <option>B+</option>
@@ -370,44 +396,51 @@
               </div>
             </div>
 
-            <div class="field-group">
-              <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
-                >Password</label
+            <!-- Password -->
+            <div>
+              <label
+                class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
               >
+                Password
+              </label>
               <div class="relative">
                 <i
                   data-lucide="lock"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600"
                 ></i>
                 <input
                   type="password"
                   placeholder="••••••••"
-                  class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200"
+                  class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
                 />
               </div>
             </div>
 
-            <div class="field-group">
-              <label class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
-                >Confirm Password</label
+            <!-- Confirm Password -->
+            <div>
+              <label
+                class="block text-xs font-medium text-gray-500 mb-1.5 pl-1"
               >
+                Confirm Password
+              </label>
               <div class="relative">
                 <i
                   data-lucide="shield-check"
-                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-600"
                 ></i>
                 <input
                   type="password"
                   placeholder="••••••••"
-                  class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 focus:outline-none focus:border-blood-600 focus:ring-4 focus:ring-blood-600/10 transition-all duration-200"
+                  class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/10"
                 />
               </div>
             </div>
 
+            <!-- Button -->
             <div class="md:col-span-2 mt-2">
               <button
                 type="submit"
-                class="w-full bg-blood-600 hover:bg-blood-700 active:scale-[0.98] text-white font-semibold text-sm py-4 rounded-2xl shadow-lg shadow-blood-200 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                class="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold text-sm py-4 rounded-2xl shadow-lg shadow-blue-200 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <i data-lucide="user-check" class="w-4 h-4"></i>
                 Register as Donor
@@ -415,20 +448,23 @@
             </div>
           </form>
 
+          <!-- Login link -->
           <div class="mt-8 text-center">
             <p class="text-sm text-gray-500">
               Already have an account?
-              <a href="#" class="text-blood-600 font-bold hover:underline ml-1"
-                >Login here</a
-              >
+              <a href="#" class="text-blue-600 font-bold hover:underline ml-1">
+                Login here
+              </a>
             </p>
           </div>
         </div>
 
+        <!-- Back button -->
         <div class="fixed bottom-8 right-8 z-20">
           <a
+            id="loginLink"
             href="#"
-            class="flex items-center gap-2 bg-white border-2 border-blood-200 text-blood-600 font-bold text-sm px-6 py-3 rounded-2xl shadow-xl hover:bg-blood-600 hover:text-white hover:border-blood-600 transition-all duration-300 group"
+            class="flex items-center gap-2 bg-white border-2 border-blue-200 text-blue-600 font-bold text-sm px-6 py-3 rounded-2xl shadow-xl hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 group"
           >
             <i
               data-lucide="arrow-left"
@@ -438,19 +474,20 @@
           </a>
         </div>
 
+        <!-- Footer -->
         <p
           class="mt-8 text-[11px] text-gray-400 font-medium opacity-50 text-center"
         >
           © 2026 BloodConnect • Verified & Secure Registration
         </p>
       </div>
-
-      <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-      </script>
     </div>
-    <div class="">
+
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <div class="hidden">
       <div
         id="toast"
         class="toast fixed top-6 right-6 z-50 bg-white border border-blood-200 rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 max-w-sm"
@@ -939,78 +976,7 @@
       </footer>
     </div>
 
-    <script>
-      // Initialize Lucide icons
-      lucide.createIcons();
-
-      // Urgent toggle
-      const urgentToggle = document.getElementById("urgentToggle");
-      const urgentBanner = document.getElementById("urgentBanner");
-      const urgentLabel = document.getElementById("urgentLabel");
-      let isUrgent = false;
-
-      urgentToggle.addEventListener("click", () => {
-        isUrgent = !isUrgent;
-        if (isUrgent) {
-          urgentBanner.classList.remove("hidden");
-          urgentToggle.classList.add(
-            "bg-blood-600",
-            "border-blood-600",
-            "text-white",
-          );
-          urgentToggle.classList.remove(
-            "border-blood-200",
-            "text-blood-600",
-            "hover:bg-blood-50",
-          );
-          urgentLabel.textContent = "Urgent";
-        } else {
-          urgentBanner.classList.add("hidden");
-          urgentToggle.classList.remove(
-            "bg-blood-600",
-            "border-blood-600",
-            "text-white",
-          );
-          urgentToggle.classList.add(
-            "border-blood-200",
-            "text-blood-600",
-            "hover:bg-blood-50",
-          );
-          urgentLabel.textContent = "Mark Urgent";
-        }
-      });
-
-      // Submit button
-      const submitBtn = document.getElementById("submitBtn");
-      const toast = document.getElementById("toast");
-
-      submitBtn.addEventListener("click", () => {
-        // Show loading state
-        const originalContent = submitBtn.innerHTML;
-        submitBtn.innerHTML = `
-        <svg class="animate-spin w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-        </svg>
-        Processing...
-      `;
-        submitBtn.disabled = true;
-        submitBtn.classList.add("opacity-80");
-
-        // Simulate submission
-        setTimeout(() => {
-          submitBtn.innerHTML = originalContent;
-          submitBtn.disabled = false;
-          submitBtn.classList.remove("opacity-80");
-          lucide.createIcons();
-
-          // Show toast
-          toast.classList.add("show");
-          setTimeout(() => {
-            toast.classList.remove("show");
-          }, 3500);
-        }, 1800);
-      });
-    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
   </body>
 </html>
