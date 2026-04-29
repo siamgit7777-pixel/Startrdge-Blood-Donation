@@ -1,132 +1,145 @@
+// All Elements
 const registerNowBtn = document.getElementById("registerNowBtn");
 const loginBtn = document.getElementById("loginBtn");
 const registerPage = document.getElementById("registerPage");
 const loginPage = document.getElementById("loginPage");
+const requestPage = document.getElementById("requestPage");
 const backBtn = document.getElementById("backBtn");
 const mainSection = document.getElementById("mainSection");
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
 
-// Register Page-e jaoar jonno
-registerNowBtn.addEventListener("click", function () {
+// Variable to store logged-in user email
+let loggedInUserEmail = "";
+const apiBaseURL = "https://sheetdb.io/api/v1/f9d9brkbkup59";
+
+// Navigation logic
+registerNowBtn.addEventListener("click", () => {
   registerPage.classList.remove("hidden");
   loginPage.classList.add("hidden");
-  // Main section thakle seta-o hide korte paren
   if (mainSection) mainSection.classList.add("hidden");
 });
 
-// Back Button logic
-backBtn.addEventListener("click", function () {
+backBtn.addEventListener("click", () => {
   loginPage.classList.remove("hidden");
   registerPage.classList.add("hidden");
   if (mainSection) mainSection.classList.remove("hidden");
 });
 
+// --- Unified Login & Auto-fill Logic ---
 loginBtn.addEventListener("click", function (event) {
   event.preventDefault();
-  console.log("Button click hoyeche!");
-
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
 
   if (email === "" || password === "") {
     alert("Please fill up all fields first!");
-  } else {
-    alert("You are not registered yet! Please register first.");
+    return;
   }
+
+  loginBtn.innerText = "Checking...";
+  loginBtn.disabled = true;
+
+  fetch(`${apiBaseURL}/search?Email=${email}`)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.length > 0) {
+        const user = data[0];
+        if (user.Password === password) {
+          loggedInUserEmail = user.Email;
+          alert("Login Successful! Welcome, " + user.Name);
+
+          // Switch to Request Page
+          loginPage.classList.add("hidden");
+          requestPage.classList.remove("hidden");
+
+          // Auto-fill fields if they exist
+          if (document.getElementById("reqName"))
+            document.getElementById("reqName").value = user.Name;
+          if (document.getElementById("reqPhoneField"))
+            document.getElementById("reqPhoneField").value =
+              user["Phone Number"];
+          if (document.getElementById("reqBloodField"))
+            document.getElementById("reqBloodField").value =
+              user["Blood Group"];
+        } else {
+          alert("Wrong password!");
+        }
+      } else {
+        alert("Email not found! Please register first.");
+      }
+    })
+    .catch(() => alert("Error connecting to database."))
+    .finally(() => {
+      loginBtn.innerText = "Login";
+      loginBtn.disabled = false;
+    });
 });
 
-// Register Form select kora
+// --- Registration Logic ---
 const registerForm = document.querySelector("#registerPage form");
-
 registerForm.addEventListener("submit", function (event) {
-  event.preventDefault(); // Page reload bondho korbe
-
-  // Button-ke disable kora jate bar bar click na hoy
+  event.preventDefault();
   const submitBtn = event.target.querySelector('button[type="submit"]');
   submitBtn.innerText = "Processing...";
   submitBtn.disabled = true;
 
-  // Form theke data gulo nite hobe (Check korun ID gulo HTML-e ache ki na)
   const formData = {
-    Name: document.getElementById("regFullName")
-      ? document.getElementById("regFullName").value
-      : "",
-    Email: document.getElementById("regEmail")
-      ? document.getElementById("regEmail").value
-      : "",
-    "Phone Number": document.getElementById("regPhone")
-      ? document.getElementById("regPhone").value
-      : "",
-    "Blood Group": document.getElementById("regBloodGroup")
-      ? document.getElementById("regBloodGroup").value
-      : "",
-    Password: document.getElementById("regPassword")
-      ? document.getElementById("regPassword").value
-      : "",
+    Name: document.getElementById("regFullName")?.value || "",
+    Email: document.getElementById("regEmail")?.value || "",
+    "Phone Number": document.getElementById("regPhone")?.value || "",
+    "Blood Group": document.getElementById("regBloodGroup")?.value || "",
+    Password: document.getElementById("regPassword")?.value || "",
   };
 
-  // Apnar SheetDB API URL
-  const apiURL = "https://sheetdb.io/api/v1/f9d9brkbkup59";
-
-  fetch(apiURL, {
+  fetch(apiBaseURL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      data: [formData],
-    }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data: [formData] }),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      alert("Registration Successful! Data added to Google Sheet.");
-      registerForm.reset(); // Form faka hoye jabe
-
-      // Login page-e niye jaoa
+    .then((res) => res.json())
+    .then(() => {
+      alert("Registration Successful!");
+      registerForm.reset();
       loginPage.classList.remove("hidden");
       registerPage.classList.add("hidden");
     })
-    .catch((error) => {
-      console.error("Error:", error);
-      alert("Something went wrong! Check your internet or code.");
-    })
+    .catch(() => alert("Registration failed. Check internet."))
     .finally(() => {
       submitBtn.innerText = "Register as Donor";
       submitBtn.disabled = false;
     });
 });
 
-// loginBtn.addEventListener("click", function () {
-//   const inputPass = document.getElementById("inputPass").value;
-//   const mobileNumberInput = document.getElementById("mobileNumber").value;
-//   console.log(mobileNumberInput);
-//   if (mobileNumberInput === "") {
-//     alert("Please enter your mobile number.");
-//   } else if (mobileNumberInput === "01869967777" && inputPass === "1234") {
-//     loginPage.style.display = "none";
-//     mainSection.classList.remove("hidden");
-//   } else {
-//     alert("Invalid mobile number or password.");
-//   }
-// });
+// --- Submit Request (Update Row) ---
+const submitBtn = document.getElementById("submitBtn");
+submitBtn.addEventListener("click", function () {
+  if (!loggedInUserEmail) return alert("Please login again.");
 
-// const loginBtn = document.getElementById("loginBtn");
-// const payBillSection = document.getElementById("payBillSection");
+  submitBtn.innerText = "Updating...";
+  submitBtn.disabled = true;
 
-// loginBtn.addEventListener("click", function () {
-//   const loginContainer = document.getElementById("loginContainer");
-//   const inputPass = document.getElementById("inputPass").value;
-//   const mobileNumberInput = document.getElementById("mobileNumber").value;
-//   const mainSection = document.getElementById("mainSection");
-//   console.log(mobileNumberInput);
+  const updatedData = {
+    Location: document.getElementById("reqLocation")?.value || "",
+    Occupation: document.getElementById("reqOccupation")?.value || "",
+    Relation: document.getElementById("reqRelation")?.value || "",
+    "Patient Name": document.getElementById("patientName")?.value || "",
+    Condition: document.getElementById("condition")?.value || "",
+    "Required Blood": document.getElementById("requiredBlood")?.value || "",
+    Hospital: document.getElementById("hospital")?.value || "",
+    "Contact Number": document.getElementById("reqPhoneField")?.value || "",
+  };
 
-//   if (mobileNumberInput === "") {
-//     alert("Please enter your mobile number.");
-//   } else if (mobileNumberInput === "01869967777" && inputPass === "1234") {
-//     loginContainer.style.display = "none";
-//     mainSection.classList.remove("hidden");
-//   } else {
-//     alert("Invalid mobile number or password.");
-//   }
-// });
+  fetch(`${apiBaseURL}/Email/${loggedInUserEmail}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data: updatedData }),
+  })
+    .then((res) => res.json())
+    .then(() => alert("Request Submitted & Sheet Updated!"))
+    .catch(() => alert("Error updating sheet!"))
+    .finally(() => {
+      submitBtn.innerText = "Submit Request";
+      submitBtn.disabled = false;
+    });
+});

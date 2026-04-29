@@ -500,7 +500,7 @@
       lucide.createIcons();
     </script>
 
-    <div class="hidden">
+    <div id="requestPage" class="hidden">
       <div
         id="toast"
         class="toast fixed top-6 right-6 z-50 bg-white border border-blood-200 rounded-2xl shadow-xl px-6 py-4 flex items-center gap-3 max-w-sm"
@@ -632,6 +632,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blood-600 pointer-events-none"
                   ></i>
                   <input
+                    id="reqName"
                     type="text"
                     placeholder="Enter full name"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 transition-all duration-200"
@@ -650,6 +651,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none"
                   ></i>
                   <input
+                    id="reqLocation"
                     type="text"
                     placeholder="City, Area"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 transition-all duration-200"
@@ -668,6 +670,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none"
                   ></i>
                   <input
+                    id="reqPhoneField"
                     type="tel"
                     placeholder="+880 1XXX-XXXXXX"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 transition-all duration-200"
@@ -686,6 +689,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none z-10"
                   ></i>
                   <select
+                    id="reqBloodField"
                     class="input-field w-full pl-10 pr-10 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 transition-all duration-200 cursor-pointer"
                   >
                     <option value="" disabled selected class="text-gray-300">
@@ -714,6 +718,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none"
                   ></i>
                   <input
+                    id="reqOccupation"
                     type="text"
                     placeholder="e.g. Student, Business"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 transition-all duration-200"
@@ -732,6 +737,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none z-10"
                   ></i>
                   <select
+                    id="reqRelation"
                     class="input-field w-full pl-10 pr-10 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 transition-all duration-200 cursor-pointer"
                   >
                     <option value="" disabled selected class="text-gray-300">
@@ -758,6 +764,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none"
                   ></i>
                   <input
+                    id="lastDonationDate"
                     type="date"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 transition-all duration-200 cursor-pointer"
                   />
@@ -813,6 +820,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none"
                   ></i>
                   <input
+                    id="patientName"
                     type="text"
                     placeholder="Enter patient name"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 transition-all duration-200"
@@ -831,6 +839,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none"
                   ></i>
                   <input
+                    id="condition"
                     type="text"
                     placeholder="e.g. Surgery, Accident, Anemia"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 transition-all duration-200"
@@ -850,6 +859,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none z-10"
                   ></i>
                   <select
+                    id="requiredBlood"
                     class="input-field w-full pl-10 pr-10 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 transition-all duration-200 cursor-pointer"
                   >
                     <option value="" disabled selected class="text-gray-300">
@@ -896,6 +906,7 @@
                     class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-300 pointer-events-none"
                   ></i>
                   <input
+                    id="hospital"
                     type="text"
                     placeholder="Hospital name, address, city"
                     class="input-field w-full pl-10 pr-4 py-3 bg-gray-50/80 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-300 transition-all duration-200"
