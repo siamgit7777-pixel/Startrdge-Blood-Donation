@@ -143,3 +143,39 @@ submitBtn.addEventListener("click", function () {
       submitBtn.disabled = false;
     });
 });
+
+const scriptURL =
+  "https://script.google.com/macros/s/AKfycbz2pOtErvEe0NM4I7SvYJq0aLsftHIR3op6iSkgVIKuwR4_BiZZYFJqNgP8OxKRUyrB/exec";
+
+document.getElementById("submitBtn").addEventListener("click", async () => {
+  const data = {
+    name: document.getElementById("reqName").value,
+    location: document.getElementById("reqLocation").value,
+    phone: document.getElementById("reqPhoneField").value,
+    blood: document.getElementById("reqBloodField").value,
+    occupation: document.getElementById("reqOccupation").value,
+    relation: document.getElementById("reqRelation").value,
+    lastDonation: document.getElementById("lastDonationDate").value,
+
+    patientName: document.getElementById("patientName").value,
+    condition: document.getElementById("condition").value,
+    requiredBlood: document.getElementById("requiredBlood").value,
+    contact: document.querySelectorAll("input[type='tel']")[1].value,
+    hospital: document.getElementById("hospital").value,
+    date: document.querySelectorAll("input[type='date']")[1].value,
+    time: document.querySelector("input[type='time']").value,
+  };
+
+  try {
+    await fetch(scriptURL, {
+      method: "POST",
+      body: new URLSearchParams(data),
+    });
+
+    // success toast show
+    document.getElementById("toast").classList.remove("hidden");
+  } catch (error) {
+    alert("Error submitting form");
+    console.error(error);
+  }
+});
