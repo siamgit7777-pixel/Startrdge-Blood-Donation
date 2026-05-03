@@ -176,9 +176,13 @@
         <!-- Header -->
         <div class="text-center mb-8">
           <div
-            class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 mx-auto mb-4"
+            class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
           >
-            <i data-lucide="heart-pulse" class="w-8 h-8 text-white"></i>
+            <img
+              class="w-32"
+              src="./502994599_122117611634863518_5689841567536601709_n.jpg"
+              alt=""
+            />
           </div>
           <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
             Welcome Back
@@ -554,8 +558,143 @@
               <i data-lucide="phone" class="w-4 h-4 text-blood-600"></i>
             </a>
           </div>
+          <img
+            id="profileBtn"
+            src="https://i.pravatar.cc/40"
+            alt="Profile"
+            class="w-9 h-9 rounded-full object-cover border-2 border-blood-200 cursor-pointer"
+          />
         </div>
       </header>
+
+      <!-- update profile -->
+      <div id="editProfile" class="max-w-3xl mx-auto px-6 py-12 hidden">
+        <!-- Card -->
+        <div
+          class="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-100 p-6 md:p-10"
+        >
+          <!-- Header -->
+          <div class="flex items-center justify-between mb-10">
+            <div class="flex items-center gap-4">
+              <!-- Image Upload -->
+              <div class="relative group w-20 h-20">
+                <!-- Image -->
+                <img
+                  id="profileImage"
+                  src="https://i.pravatar.cc/100"
+                  class="w-full h-full rounded-full object-cover border-4 border-white shadow-md"
+                />
+
+                <!-- Overlay -->
+                <label
+                  class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200 cursor-pointer"
+                >
+                  <span class="text-white text-xs font-medium">Edit</span>
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    class="hidden"
+                  />
+                </label>
+              </div>
+
+              <div>
+                <h2 class="text-2xl font-bold text-gray-900 tracking-tight">
+                  Edit Profile
+                </h2>
+                <p class="text-xs text-gray-400 mt-1">
+                  Manage your personal details
+                </p>
+              </div>
+            </div>
+
+            <!-- small badge -->
+            <span
+              class="text-[10px] bg-blood-50 text-blood-600 px-3 py-1 rounded-full font-semibold"
+            >
+              Active User
+            </span>
+          </div>
+
+          <!-- Form -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Full Name -->
+            <div class="relative">
+              <label class="text-xs text-gray-500 pl-1">Full Name</label>
+              <i
+                data-lucide="user"
+                class="absolute left-3 top-[38px] w-4 h-4 text-blood-500"
+              ></i>
+              <input
+                type="text"
+                placeholder="Enter your name"
+                class="w-full mt-1 pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:border-blood-500 focus:ring-2 focus:ring-blood-100 outline-none transition"
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="relative">
+              <label class="text-xs text-gray-500 pl-1">Email</label>
+              <i
+                data-lucide="mail"
+                class="absolute left-3 top-[38px] w-4 h-4 text-blood-500"
+              ></i>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="w-full mt-1 pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:border-blood-500 focus:ring-2 focus:ring-blood-100 outline-none transition"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div class="relative">
+              <label class="text-xs text-gray-500 pl-1">Phone Number</label>
+              <i
+                data-lucide="phone"
+                class="absolute left-3 top-[38px] w-4 h-4 text-blood-500"
+              ></i>
+              <input
+                type="tel"
+                placeholder="+880..."
+                class="w-full mt-1 pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:border-blood-500 focus:ring-2 focus:ring-blood-100 outline-none transition"
+              />
+            </div>
+
+            <!-- Password -->
+            <div class="relative md:col-span-2">
+              <label class="text-xs text-gray-500 pl-1">Change Password</label>
+              <i
+                data-lucide="lock"
+                class="absolute left-3 top-[38px] w-4 h-4 text-blood-500"
+              ></i>
+              <input
+                type="password"
+                placeholder="New password"
+                class="w-full mt-1 pl-10 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:border-blood-500 focus:ring-2 focus:ring-blood-100 outline-none transition"
+              />
+            </div>
+          </div>
+
+          <div class="flex justify-between">
+            <!-- Button -->
+            <div class="mt-10 flex items-center">
+              <button
+                class="bg-blood-600 hover:bg-blood-700 text-white text-sm font-semibold px-8 py-3 rounded-xl shadow-lg shadow-blood-200 transition-all duration-300 flex items-center gap-2"
+              >
+                <i data-lucide="save" class="w-4 h-4"></i>
+                Save Changes
+              </button>
+            </div>
+            <button
+              id="profileBackBtn"
+              class="text-xs text-gray-500 hover:text-blood-600 items-center gap-1 flex transition-colors"
+            >
+              ← Back
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div id="urgentBanner" class="hidden w-full bg-blood-600 overflow-hidden">
         <div

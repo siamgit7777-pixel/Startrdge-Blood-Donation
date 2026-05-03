@@ -1,181 +1,166 @@
-// All Elements
+// ===== ELEMENTS =====
 const registerNowBtn = document.getElementById("registerNowBtn");
 const loginBtn = document.getElementById("loginBtn");
 const registerPage = document.getElementById("registerPage");
 const loginPage = document.getElementById("loginPage");
 const requestPage = document.getElementById("requestPage");
-const backBtn = document.getElementById("backBtn");
-const mainSection = document.getElementById("mainSection");
+
+const backBtns = document.querySelectorAll("#backBtn"); // FIXED
+
 const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
 
-// Variable to store logged-in user email
+const submitBtn = document.getElementById("submitBtn");
+
 let loggedInUserEmail = "";
 const apiBaseURL = "https://sheetdb.io/api/v1/f9d9brkbkup59";
 
-// Navigation logic
+// ===== NAVIGATION =====
 registerNowBtn.addEventListener("click", () => {
   registerPage.classList.remove("hidden");
   loginPage.classList.add("hidden");
-  if (mainSection) mainSection.classList.add("hidden");
 });
 
-backBtn.addEventListener("click", () => {
-  loginPage.classList.remove("hidden");
-  registerPage.classList.add("hidden");
-  if (mainSection) mainSection.classList.remove("hidden");
+backBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    registerPage.classList.add("hidden");
+    requestPage.classList.add("hidden");
+    loginPage.classList.remove("hidden");
+  });
 });
 
-// --- Unified Login & Auto-fill Logic ---
-loginBtn.addEventListener("click", function (event) {
-  event.preventDefault();
+// ===== LOGIN =====
+loginBtn.addEventListener("click", async () => {
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
 
-  if (email === "" || password === "") {
-    alert("Please fill up all fields first!");
+  if (!email || !password) {
+    alert("Fill all fields");
     return;
   }
 
   loginBtn.innerText = "Checking...";
   loginBtn.disabled = true;
 
-  fetch(`${apiBaseURL}/search?Email=${email}`)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.length > 0) {
-        const user = data[0];
-        if (user.Password === password) {
-          loggedInUserEmail = user.Email;
-          alert("Login Successful! Welcome, " + user.Name);
+  try {
+    const res = await fetch(`${apiBaseURL}/search?Email=${email}`);
+    const data = await res.json();
 
-          // Switch to Request Page
-          loginPage.classList.add("hidden");
-          requestPage.classList.remove("hidden");
+    if (data.length > 0) {
+      const user = data[0];
 
-          // Auto-fill fields if they exist
-          if (document.getElementById("reqName"))
-            document.getElementById("reqName").value = user.Name;
-          if (document.getElementById("reqPhoneField"))
-            document.getElementById("reqPhoneField").value =
-              user["Phone Number"];
-          if (document.getElementById("reqBloodField"))
-            document.getElementById("reqBloodField").value =
-              user["Blood Group"];
-        } else {
-          alert("Wrong password!");
-        }
+      if (user.Password === password) {
+        loggedInUserEmail = user.Email;
+
+        alert("Login Success");
+
+        loginPage.classList.add("hidden");
+        requestPage.classList.remove("hidden");
+
+        // autofill
+        document.getElementById("reqName").value = user.Name || "";
+        document.getElementById("reqPhoneField").value =
+          user["Phone Number"] || "";
+        document.getElementById("reqBloodField").value =
+          user["Blood Group"] || "";
       } else {
-        alert("Email not found! Please register first.");
+        alert("Wrong password");
       }
-    })
-    .catch(() => alert("Error connecting to database."))
-    .finally(() => {
-      loginBtn.innerText = "Login";
-      loginBtn.disabled = false;
-    });
+    } else {
+      alert("User not found");
+    }
+  } catch (err) {
+    alert("Server error");
+  }
+
+  loginBtn.innerText = "Login";
+  loginBtn.disabled = false;
 });
 
-// --- Registration Logic ---
+// ===== REGISTER =====
 const registerForm = document.querySelector("#registerPage form");
-registerForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const submitBtn = event.target.querySelector('button[type="submit"]');
-  submitBtn.innerText = "Processing...";
-  submitBtn.disabled = true;
 
-  const formData = {
-    Name: document.getElementById("regFullName")?.value || "",
-    Email: document.getElementById("regEmail")?.value || "",
-    "Phone Number": document.getElementById("regPhone")?.value || "",
-    "Blood Group": document.getElementById("regBloodGroup")?.value || "",
-    Password: document.getElementById("regPassword")?.value || "",
-  };
+registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  fetch(apiBaseURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ data: [formData] }),
-  })
-    .then((res) => res.json())
-    .then(() => {
-      alert("Registration Successful!");
-      registerForm.reset();
-      loginPage.classList.remove("hidden");
-      registerPage.classList.add("hidden");
-    })
-    .catch(() => alert("Registration failed. Check internet."))
-    .finally(() => {
-      submitBtn.innerText = "Register as Donor";
-      submitBtn.disabled = false;
-    });
-});
-
-// --- Submit Request (Update Row) ---
-const submitBtn = document.getElementById("submitBtn");
-submitBtn.addEventListener("click", function () {
-  if (!loggedInUserEmail) return alert("Please login again.");
-
-  submitBtn.innerText = "Updating...";
-  submitBtn.disabled = true;
-
-  const updatedData = {
-    Location: document.getElementById("reqLocation")?.value || "",
-    Occupation: document.getElementById("reqOccupation")?.value || "",
-    Relation: document.getElementById("reqRelation")?.value || "",
-    "Patient Name": document.getElementById("patientName")?.value || "",
-    Condition: document.getElementById("condition")?.value || "",
-    "Required Blood": document.getElementById("requiredBlood")?.value || "",
-    Hospital: document.getElementById("hospital")?.value || "",
-    "Contact Number": document.getElementById("reqPhoneField")?.value || "",
-  };
-
-  fetch(`${apiBaseURL}/Email/${loggedInUserEmail}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ data: updatedData }),
-  })
-    .then((res) => res.json())
-    .then(() => alert("Request Submitted & Sheet Updated!"))
-    .catch(() => alert("Error updating sheet!"))
-    .finally(() => {
-      submitBtn.innerText = "Submit Request";
-      submitBtn.disabled = false;
-    });
-});
-
-const scriptURL =
-  "https://script.google.com/macros/s/AKfycbz2pOtErvEe0NM4I7SvYJq0aLsftHIR3op6iSkgVIKuwR4_BiZZYFJqNgP8OxKRUyrB/exec";
-
-document.getElementById("submitBtn").addEventListener("click", async () => {
   const data = {
-    name: document.getElementById("reqName").value,
-    location: document.getElementById("reqLocation").value,
-    phone: document.getElementById("reqPhoneField").value,
-    blood: document.getElementById("reqBloodField").value,
-    occupation: document.getElementById("reqOccupation").value,
-    relation: document.getElementById("reqRelation").value,
-    lastDonation: document.getElementById("lastDonationDate").value,
-
-    patientName: document.getElementById("patientName").value,
-    condition: document.getElementById("condition").value,
-    requiredBlood: document.getElementById("requiredBlood").value,
-    contact: document.querySelectorAll("input[type='tel']")[1].value,
-    hospital: document.getElementById("hospital").value,
-    date: document.querySelectorAll("input[type='date']")[1].value,
-    time: document.querySelector("input[type='time']").value,
+    Name: document.getElementById("regFullName").value,
+    Email: document.getElementById("regEmail").value,
+    "Phone Number": document.getElementById("regPhone").value,
+    "Blood Group": document.getElementById("regBloodGroup").value,
+    Password: document.getElementById("regPassword").value,
   };
 
   try {
-    await fetch(scriptURL, {
+    await fetch(apiBaseURL, {
       method: "POST",
-      body: new URLSearchParams(data),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data: [data] }),
     });
 
-    // success toast show
-    document.getElementById("toast").classList.remove("hidden");
-  } catch (error) {
-    alert("Error submitting form");
-    console.error(error);
+    alert("Registration Success");
+
+    registerPage.classList.add("hidden");
+    loginPage.classList.remove("hidden");
+  } catch {
+    alert("Registration Failed");
   }
+});
+
+// ===== SUBMIT REQUEST =====
+submitBtn.addEventListener("click", async () => {
+  if (!loggedInUserEmail) {
+    alert("Login first");
+    return;
+  }
+
+  submitBtn.innerText = "Submitting...";
+  submitBtn.disabled = true;
+
+  const data = {
+    Location: document.getElementById("reqLocation").value,
+    Occupation: document.getElementById("reqOccupation").value,
+    Relation: document.getElementById("reqRelation").value,
+    "Patient Name": document.getElementById("patientName").value,
+    Condition: document.getElementById("condition").value,
+    "Required Blood": document.getElementById("requiredBlood").value,
+    Hospital: document.getElementById("hospital").value,
+    "Contact Number": document.getElementById("reqPhoneField").value,
+  };
+
+  try {
+    await fetch(`${apiBaseURL}/Email/${loggedInUserEmail}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data }),
+    });
+
+    document.getElementById("toast").classList.add("show");
+  } catch {
+    alert("Submit failed");
+  }
+
+  submitBtn.innerText = "Submit Request";
+  submitBtn.disabled = false;
+});
+
+// ===== PROFILE IMAGE UPLOAD =====
+const imageUpload = document.getElementById("imageUpload");
+const profileImage = document.getElementById("profileImage");
+
+if (imageUpload) {
+  imageUpload.addEventListener("change", () => {
+    const file = imageUpload.files[0];
+    if (file) {
+      profileImage.src = URL.createObjectURL(file);
+    }
+  });
+}
+
+// ===== PROFILE PAGE TOGGLE =====
+const profileBtn = document.getElementById("profileBtn");
+const editProfile = document.getElementById("editProfile");
+
+profileBtn.addEventListener("click", () => {
+  editProfile.classList.remove("hidden");
 });
